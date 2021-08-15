@@ -1,20 +1,17 @@
 module LHEF
 
-import Base.dot
+using LightXML, LorentzVectors
 
-using LightXML
-using Compat
-
-immutable EventHeader
-    nup::Uint8          # Number of particles
-    ldprup::Uint8       # Process type?
+struct EventHeader
+    nup::UInt8          # Number of particles
+    ldprup::UInt8       # Process type?
     xwgtup::Float64     # Event Wight
     scalup::Float64     # Scale
     αem::Float64        # AQEDUP
     αs::Float64         # AQCDUP
 end
 
-immutable FourVector
+struct FourVector
     data::NTuple{4,Float64}
 end
 getindex(x::FourVector,i) = x.data[i+1]
@@ -22,18 +19,18 @@ getindex(x::FourVector,i) = x.data[i+1]
 # Mostly negative convention
 dot(x::FourVector,y::FourVector) = (x[0]*y[0]-x[1]*y[1]-x[2]*y[2]-x[3]*y[3])
 
-immutable Particle
+struct Particle
     particle::Int8
     status::Int8
-    mothup::NTuple{2,Uint8}
-    color::NTuple{2,Uint16}
+    mothup::NTuple{2,UInt8}
+    color::NTuple{2,UInt16}
     pμ::FourVector
     m::Float64
     vtimup::Float64
     spinup::Float64
 end
 
-immutable Event
+struct Event
     header::EventHeader
     data::Vector{Particle}
 end
@@ -59,22 +56,8 @@ function parse_lhe(filename; format = nothing)
     events = get_elements_by_tagname(lhenode,"event")
 
     [begin
-        data = content(event)
-        lines = @compat split(data,'\n',keep=false)
-        headerdata = @compat split(lines[1],' ',keep=false)
-        header = EventHeader(parseint(headerdata[1]), parseint(headerdata[2]),
-            parsefloat(Float64, headerdata[3]), parsefloat(Float64, headerdata[4]),
-            parsefloat(Float64, headerdata[5]), parsefloat(Float64, headerdata[6]))
         data = [begin
-            fields = @compat split(line,' ',keep=false)
-            p = Particle(parseint(Int8,fields[1]),parseint(Int8,fields[2]),
-                (parseint(Uint8,fields[3]),parseint(Uint8,fields[4])),
-                (parseint(Uint16,fields[5]),parseint(Uint16,fields[6])),
-                FourVector((parsefloat(Float64,fields[10]),parsefloat(Float64,fields[7]),
-                    parsefloat(Float64,fields[8]),parsefloat(Float64,fields[9]))),
-                parsefloat(Float64, fields[11]), parsefloat(Float64, fields[12]),
-                parsefloat(Float64, fields[13]))
-            p
+                    1
         end for line in lines[2:end]]
         Event(header,data)
     end for event in events]
