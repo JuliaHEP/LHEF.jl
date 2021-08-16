@@ -11,20 +11,12 @@ struct EventHeader
     αs::Float64         # AQCDUP
 end
 
-struct FourVector
-    data::NTuple{4,Float64}
-end
-getindex(x::FourVector,i) = x.data[i+1]
-
-# Mostly negative convention
-dot(x::FourVector,y::FourVector) = (x[0]*y[0]-x[1]*y[1]-x[2]*y[2]-x[3]*y[3])
-
 struct Particle
     particle::Int8
     status::Int8
     mothup::NTuple{2,UInt8}
     color::NTuple{2,UInt16}
-    pμ::FourVector
+    pμ::LorentzVector{Float64}
     m::Float64
     vtimup::Float64
     spinup::Float64
@@ -34,14 +26,14 @@ struct Event
     header::EventHeader
     data::Vector{Particle}
 end
- 
-function parse_lhe(filename; format = nothing)
+
+function parse_lhe(filename; format=nothing)
     if format === nothing
         # Format not declared, inferring from extension
-        fparts = split(basename(filename),".")
+        fparts = split(basename(filename), ".")
         if fparts[end] == "lhe"
             format = :lhe
-        elseif fparts[end] == "gz" && fparts[end-1] == "lhe"
+        elseif fparts[end] == "gz" && fparts[end - 1] == "lhe"
             format = :lhegz
         end
     end
@@ -51,18 +43,47 @@ function parse_lhe(filename; format = nothing)
     lhenode = root(lhefile)
 
     (name(lhenode) == "LesHouchesEvents") || error("Invalid root node")
-    (attributes_dict(lhenode)["version"] == "3.0") || error("Unsupported Version")
+    # (attributes_dict(lhenode)["version"] == "3.0") || error("Unsupported Version")
 
-    events = get_elements_by_tagname(lhenode,"event")
+    events = lhenode["event"]
 
-    [begin
-        data = [begin
-                    1
-        end for line in lines[2:end]]
-        Event(header,data)
-    end for event in events]
+    return [
+        begin
+            data = content(first(child_nodes(event)))
+            lines = split(data, '\n'; keepempty=false)
+            headerdata = split(lines[1], ' '; keepempty=false)
+            header = EventHeader(
+                parse(UInt8, headerdata[1]),
+                parse(UInt8, headerdata[2]),
+                parse(Float64, headerdata[3]),
+                parse(Float64, headerdata[4]),
+                parse(Float64, headerdata[5]),
+                parse(Float64, headerdata[6]),
+            )
+            data = [
+                begin
+                    fields = split(line, ' '; keepempty=false)
+                    p = Particle(
+                        parse(Int8, fields[1]),
+                        parse(Int8, fields[2]),
+                        (parse(UInt8, fields[3]), parse(UInt8, fields[4])),
+                        (parse(UInt16, fields[5]), parse(UInt16, fields[6])),
+                        LorentzVector(
+                            parse(Float64, fields[10]),
+                            parse(Float64, fields[7]),
+                            parse(Float64, fields[8]),
+                            parse(Float64, fields[9]),
+                        ),
+                        parse(Float64, fields[11]),
+                        parse(Float64, fields[12]),
+                        parse(Float64, fields[13]),
+                    )
+                    p
+                end for line in lines[2:end]
+            ]
+            Event(header, data)
+        end for event in events
+    ]
 end
-
-# package code goes here
 
 end # module
