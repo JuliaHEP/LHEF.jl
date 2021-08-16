@@ -14,7 +14,7 @@ struct EventHeader
 end
 
 struct Particle
-    particle::Int8
+    particle::Int32
     status::Int8
     mothup::NTuple{2,UInt8}
     color::NTuple{2,UInt16}
@@ -62,7 +62,7 @@ function parse_lhe(filename; format=nothing)
                 begin
                     fields = split(line, ' '; keepempty=false)
                     p = Particle(
-                        parse(Int8, fields[1]),
+                        parse(Int32, fields[1]),
                         parse(Int8, fields[2]),
                         (parse(UInt8, fields[3]), parse(UInt8, fields[4])),
                         (parse(UInt16, fields[5]), parse(UInt16, fields[6])),
