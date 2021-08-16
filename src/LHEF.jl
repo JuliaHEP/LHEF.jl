@@ -2,6 +2,8 @@ module LHEF
 
 using LightXML, LorentzVectors
 
+export parse_lhe
+
 struct EventHeader
     nup::UInt8          # Number of particles
     ldprup::UInt8       # Process type?
@@ -31,22 +33,18 @@ function parse_lhe(filename; format=nothing)
     if format === nothing
         # Format not declared, inferring from extension
         fparts = split(basename(filename), ".")
-        if fparts[end] == "lhe"
-            format = :lhe
+        format = if fparts[end] == "lhe"
+            :lhe
         elseif fparts[end] == "gz" && fparts[end - 1] == "lhe"
-            format = :lhegz
+            :lhegz
         end
     end
 
-    @assert format == :lhe
     lhefile = parse_file(filename)
     lhenode = root(lhefile)
 
     (name(lhenode) == "LesHouchesEvents") || error("Invalid root node")
-    # (attributes_dict(lhenode)["version"] == "3.0") || error("Unsupported Version")
-
     events = lhenode["event"]
-
     return [
         begin
             data = content(first(child_nodes(event)))
