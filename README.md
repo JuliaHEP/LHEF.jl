@@ -1,5 +1,5 @@
 # LHEF
-
+[![Build Status](https://github.com/JuliaHEP/LHEF.jl/workflows/CI/badge.svg)](https://github.com/JuliaHEP/LHEF.jl/actions)
 ## Example
 
 ```julia
