@@ -12,9 +12,10 @@ end
 function Base.show(io::IO, evt::Event)
     println(io)
     println(io, "  Event header: ", evt.header)
-    println(io, "  Event particles:")
-    for p in evt.particles
-        println(io, "    ", p)
+    parts = evt.particles
+    println(io, "  Event particles $(keys(first(parts))):")
+    for (ip,p) in enumerate(parts)
+        print(io, "    ", values(p), ip == length(parts) ? "" : "\n")
     end
 end
 
