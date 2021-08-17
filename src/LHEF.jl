@@ -61,11 +61,8 @@ function parse_lhe(filename)
 end
 
 function flatparticles(filename)
-    particles = []
-    for (ievt,evt) in enumerate(parse_lhe(filename))
-        push!(particles, [(;eventnum=ievt, p...) for p in evt.particles])
-    end
-    return vcat(particles...)
+    vcat([[(;eventnum=ievt, p...) for p in evt.particles]
+          for (ievt,evt) in enumerate(parse_lhe(filename))]...)
 end
 
 end # module
