@@ -8,19 +8,15 @@ julia> using LHEF
 julia> events = parse_lhe("./test/ft.lhe.gz"); # lazy generator
 
 julia> event = first(events)
-
-  Event header: (nparticles = 6, pid = 0, weight = 1.1829e-5, scale = 214.5584, aqed = 0.007546771, aqcd = 0.1139351)
-  Event particles (:idx, :id, :status, :mother1, :mother2, :color1, :color2, :px, :py, :pz, :e, :m, :lifetime, :spin):
-    (0, 21, -1, 0, 0, 502, 503, 0.0, 0.0, 515.31921514, 515.31921514, 0.0, 0.0, -1.0)
-    (1, 21, -1, 0, 0, 503, 504, 0.0, 0.0, -649.98283734, 649.98283734, 0.0, 0.0, -1.0)
-    (2, 6, 1, 1, 2, 501, 0, -130.58110551, 95.902583415, -221.13924459, 324.16091084, 173.0, 0.0, -1.0)
-    (3, 6, 1, 1, 2, 502, 0, 96.850960221, -26.621733185, 300.72483123, 361.18312432, 173.0, 0.0, -1.0)
-    (4, -6, 1, 1, 2, 0, 501, 125.43365625, -19.928902577, -51.749377613, 220.76630486, 173.0, 0.0, 1.0)
-    (5, -6, 1, 1, 2, 0, 504, -91.703510957, -49.351947654, -162.49983123, 259.19171246, 173.0, 0.0, -1.0)
-
-julia> event.particles[1].id
-21
-
+  Event header: (nparticles = 6, pid = 0, weight = 1.1829e-5, scale = 255.6536, aqed = 0.007546771, aqcd = 0.1112889)
+  Event particles:
+  idx|     id| status| mother1| mother2| color1| color2|             px|             py|             pz|              e|      m| lifetime|   spin
+    0,     21,     -1,       0,       0,    502,    503,            0.0,            0.0,   1070.9531583,   1070.9531583,    0.0,      0.0,   -1.0
+    1,     21,     -1,       0,       0,    501,    504,            0.0,            0.0,  -774.76002582,   774.76002582,    0.0,      0.0,    1.0
+    2,      6,      1,       1,       2,    501,      0,   113.37785248,   114.16185862,  -41.887649846,   239.93966451,  173.0,      0.0,    1.0
+    3,      6,      1,       1,       2,    502,      0,   34.597641987,  -272.46642769,  -245.76811815,   407.14360973,  173.0,      0.0,    1.0
+    4,     -6,      1,       1,       2,      0,    503,   15.534573574,   182.89123966,    822.7134095,    860.5096645,  173.0,      0.0,   -1.0
+    5,     -6,      1,       1,       2,      0,    504,  -163.51006804,  -24.586670591,  -238.86450899,   338.12024543,  173.0,      0.0,   -1.0
 ```
 
 To facilitate columnar manipulations, there is an additional function which inserts consecutive event numbers into each
@@ -28,10 +24,10 @@ particle and concatenates particles across events.
 ```julia
 julia> particles = flatparticles("./test/ft.lhe.gz");
 
-julia> keys(particle[100])
+julia> keys(particles[100])
 (:eventnum, :idx, :id, :status, :mother1, :mother2, :color1, :color2, :px, :py, :pz, :e, :m, :lifetime, :spin)
 
-julia> values(particle[100])
+julia> values(particles[100])
 (1, 0, 21, -1, 0, 0, 502, 503, 0.0, 0.0, 1070.9531583, 1070.9531583, 0.0, 0.0, -1.0)
 
 julia> using DataFrames
