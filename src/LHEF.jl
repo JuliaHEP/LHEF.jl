@@ -1,87 +1,69 @@
 module LHEF
 
-using LightXML, LorentzVectors
+using EzXML
 
-export parse_lhe
-
-struct EventHeader
-    nup::UInt8          # Number of particles
-    ldprup::UInt8       # Process type?
-    xwgtup::Float64     # Event Wight
-    scalup::Float64     # Scale
-    αem::Float64        # AQEDUP
-    αs::Float64         # AQCDUP
-end
-
-struct Particle
-    particle::Int32
-    status::Int8
-    mothup::NTuple{2,UInt8}
-    color::NTuple{2,UInt16}
-    pμ::LorentzVector{Float64}
-    m::Float64
-    vtimup::Float64
-    spinup::Float64
-end
+export parse_lhe, flatparticles
 
 struct Event
-    header::EventHeader
-    data::Vector{Particle}
+    header
+    particles
 end
 
-function parse_lhe(filename; format=nothing)
-    if format === nothing
-        # Format not declared, inferring from extension
-        fparts = split(basename(filename), ".")
-        format = if fparts[end] == "lhe"
-            :lhe
-        elseif fparts[end] == "gz" && fparts[end - 1] == "lhe"
-            :lhegz
-        end
+function Base.show(io::IO, evt::Event)
+    println(io)
+    println(io, "  Event header: ", evt.header)
+    parts = evt.particles
+    println(io, "  Event particles $(keys(first(parts))):")
+    for (ip,p) in enumerate(parts)
+        print(io, "    ", values(p), ip == length(parts) ? "" : "\n")
     end
+end
 
-    lhefile = parse_file(filename)
-    lhenode = root(lhefile)
-
-    (name(lhenode) == "LesHouchesEvents") || error("Invalid root node")
-    events = lhenode["event"]
-    return [
+function parse_event(event)
+    lines = split(event, '\n'; keepempty=false)
+    headerdata = split(lines[1], ' '; keepempty=false)
+    header = (;
+        nparticles=parse(Int16, headerdata[1]), # Number of particles
+        pid=parse(Int16, headerdata[2]),        # Process type
+        weight=parse(Float64, headerdata[3]),   # Event weight
+        scale=parse(Float64, headerdata[4]),    # Scale
+        aqed=parse(Float64, headerdata[5]),     # AQEDUP
+        aqcd=parse(Float64, headerdata[6]),     # AQCDUP
+    )
+    particles = [
         begin
-            data = content(first(child_nodes(event)))
-            lines = split(data, '\n'; keepempty=false)
-            headerdata = split(lines[1], ' '; keepempty=false)
-            header = EventHeader(
-                parse(UInt8, headerdata[1]),
-                parse(UInt8, headerdata[2]),
-                parse(Float64, headerdata[3]),
-                parse(Float64, headerdata[4]),
-                parse(Float64, headerdata[5]),
-                parse(Float64, headerdata[6]),
+            fields = split(line, ' '; keepempty=false)
+            p = (;
+                idx=idx-1, # zero-based to match `mother1`, `mother2`
+                id=parse(Int32, fields[1]),
+                status=parse(Int8, fields[2]),
+                mother1=parse(Int16, fields[3]),
+                mother2=parse(Int16, fields[4]),
+                color1=parse(Int32, fields[5]),
+                color2=parse(Int32, fields[6]),
+                px=parse(Float64, fields[7]),
+                py=parse(Float64, fields[8]),
+                pz=parse(Float64, fields[9]),
+                e=parse(Float64, fields[10]),
+                m=parse(Float64, fields[11]),
+                lifetime=parse(Float64, fields[12]),
+                spin=parse(Float64, fields[13]),
             )
-            data = [
-                begin
-                    fields = split(line, ' '; keepempty=false)
-                    p = Particle(
-                        parse(Int32, fields[1]),
-                        parse(Int8, fields[2]),
-                        (parse(UInt8, fields[3]), parse(UInt8, fields[4])),
-                        (parse(UInt16, fields[5]), parse(UInt16, fields[6])),
-                        LorentzVector(
-                            parse(Float64, fields[10]),
-                            parse(Float64, fields[7]),
-                            parse(Float64, fields[8]),
-                            parse(Float64, fields[9]),
-                        ),
-                        parse(Float64, fields[11]),
-                        parse(Float64, fields[12]),
-                        parse(Float64, fields[13]),
-                    )
-                    p
-                end for line in lines[2:end]
-            ]
-            Event(header, data)
-        end for event in events
+            p
+        end for (idx,line) in enumerate(lines[2:2+header.nparticles-1])
     ]
+    return Event(header, particles)
+end
+
+function parse_lhe(filename)
+    reader = open(EzXML.StreamReader, filename)
+    f(item) = (item != nothing) && (reader.name == "event") && (reader.type == EzXML.READER_ELEMENT)
+    return (parse_event(reader.content) for _ in Iterators.filter(f, reader))
+end
+
+function flatparticles(filename)
+    vcat([[(;eventnum=ievt, p...) for p in evt.particles]
+          for (ievt,evt) in enumerate(parse_lhe(filename))]...)
 end
 
 end # module
