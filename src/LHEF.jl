@@ -2,7 +2,7 @@ module LHEF
 
 using EzXML
 
-export parse_lhe
+export parse_lhe, flatparticles
 
 struct Event
     header
@@ -58,6 +58,14 @@ function parse_lhe(filename)
     reader = open(EzXML.StreamReader, filename)
     f(item) = (item != nothing) && (reader.name == "event") && (reader.type == EzXML.READER_ELEMENT)
     return (parse_event(reader.content) for _ in Iterators.filter(f, reader))
+end
+
+function flatparticles(filename)
+    particles = []
+    for (ievt,evt) in enumerate(parse_lhe(filename))
+        push!(particles, [(;eventnum=ievt, p...) for p in evt.particles])
+    end
+    return vcat(particles...)
 end
 
 end # module
