@@ -1,6 +1,6 @@
 module LHEF
 
-using EzXML, LorentzVectors
+using EzXML
 
 export parse_lhe
 
