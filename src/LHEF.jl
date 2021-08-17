@@ -10,11 +10,11 @@ struct Event
 end
 
 function Base.show(io::IO, evt::Event)
-    println()
-    println("  Event header: ", evt.header)
-    println("  Event particles:")
+    println(io)
+    println(io, "  Event header: ", evt.header)
+    println(io, "  Event particles:")
     for p in evt.particles
-        println("    ", p)
+        println(io, "    ", p)
     end
 end
 
