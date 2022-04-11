@@ -5,8 +5,8 @@ using EzXML
 export parse_lhe, flatparticles
 
 struct Event
-    header
-    particles
+    header::NamedTuple
+    particles::Vector{NamedTuple}
 end
 
 function Base.show(io::IO, evt::Event)
