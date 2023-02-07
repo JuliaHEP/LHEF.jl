@@ -1,6 +1,7 @@
-# LHEF
+# LHEF.jl
 [![Build Status](https://github.com/JuliaHEP/LHEF.jl/workflows/CI/badge.svg)](https://github.com/JuliaHEP/LHEF.jl/actions)
-## Example
+
+## Opening a LHE file
 
 ```julia
 julia> using LHEF
@@ -18,6 +19,21 @@ julia> event = first(events)
     4,     -6,      1,       1,       2,      0,    503,   15.534573574,   182.89123966,    822.7134095,    860.5096645,  173.0,      0.0,   -1.0
     5,     -6,      1,       1,       2,      0,    504,  -163.51006804,  -24.586670591,  -238.86450899,   338.12024543,  173.0,      0.0,   -1.0
 ```
+
+## LorentzVector and Physical quantity
+
+If you need to compute physical quantities such as `mass`, consider using [LorentzVectorHEP.jl](https://github.com/JuliaHEP/LorentzVectorHEP.jl):
+```julia
+julia> using LorentzVectorHEP
+
+julia> lhe_v4(p) = LorentzVector(p.e, p.px, p.py, p.pz)
+
+julia> test_particle = event.particles[1]
+
+julia> mass(lhe_v4(test_particle)) == test_particle.m # self-consistency test
+```
+
+## Columnar style
 
 To facilitate columnar manipulations, there is an additional function which inserts consecutive event numbers into each
 particle and concatenates particles across events.
