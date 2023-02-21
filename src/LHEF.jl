@@ -94,15 +94,17 @@ end
 
 function parse_lhe(filename)
     root = if endswith(filename, "gz")
-            io = IOBuffer(transcode(GzipDecompressor, read(filename)))
-            Document(XML.XMLTokenIterator(io)).root
-        else
-            XML.Document(filename).root
-        end
-        if getfield(children(root)[1], :tag) == "file"
-            root = children(root)[1]
-        end
-        return [parse_event(ele[1]) for ele in children(root) if ele isa XML.Element && getfield(ele, :tag) == "event"]
+        io = IOBuffer(transcode(GzipDecompressor, read(filename)))
+        Document(XML.XMLTokenIterator(io)).root
+    else
+        XML.Document(filename).root
+    end
+
+    first_child = children(root)[1]
+    if first_child isa XML.Element && getfield(first_child, :tag) == "file"
+        root = first_child
+    end
+    return [parse_event(ele[1]) for ele in children(root) if ele isa XML.Element && getfield(ele, :tag) == "event"]
 end
 
 function flatparticles(filename)
