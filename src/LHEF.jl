@@ -4,7 +4,7 @@ using XML, CodecZlib, StructArrays
 
 export parse_lhe, flatparticles
 
-@kwdef struct Header
+Base.@kwdef struct Header
     nparticles::Int16
     pid::Int16
     weight::Float64
@@ -14,7 +14,7 @@ export parse_lhe, flatparticles
 end
 Base.values(h::Header) = (h.nparticles, h.pid, h.weight, h.scale, h.aqed, h.aqcd)
 
-@kwdef struct Particle
+Base.@kwdef struct Particle
     idx::Int
     id::Int32
     status::Int8
