@@ -32,31 +32,35 @@ Base.@kwdef struct Particle
 end
 Base.values(h::Particle) = (h.idx, h.id, h.status, h.mother1, h.mother2, h.color1, h.color2, h.px, h.py, h.pz, h.e, h.m, h.lifetime, h.spin)
 
-struct Event
+Base.@kwdef struct Event
     header::Header
     particles::Vector{Particle}
+    wgts::Vector{Float64}
 end
 
 function Base.show(io::IO, evt::Event)
-    pads = (3, 6, 6, 7, 7, 6, 6, 14, 14, 14, 14, 6, 8, 6)
+    pads = (3, 6, 6, 7, 7, 6, 6, 11, 11, 11, 11, 10, 7, 6)
 
     println(io, "  Event header: ", evt.header)
     parts = evt.particles
     println(io, "  Event particles:")
     print(io, "  ")
-    ks = lpad.(keys(first(parts)), pads)
+    ks = lpad.(propertynames(first(parts)), pads)
     print(io, join(ks, "| ")...)
     println(io)
 
     for p in parts
-        ps = lpad.(values(p), pads)
+        vals = [x isa Integer ? x : round(x; sigdigits=6) for x in values(p)]
+        ps = lpad.(vals, pads)
         print(io, "  ")
         print(io, join(ps, ", ")...)
         println(io)
     end
+
+    println(io, "  Event weights: ", evt.wgts)
 end
 
-function parse_event(event)
+function parse_event(event, wgt)
     lines = split(event, '\n'; keepempty=false)
     headerdata = split(lines[1], ' '; keepempty=false)
     header = Header(;
@@ -89,7 +93,12 @@ function parse_event(event)
             p
         end for (idx, line) in enumerate(lines[2:(2 + header.nparticles - 1)])
     ]
-    return Event(header, particles)
+    wgts = if getfield(wgt[1], :tag) == "wgt"
+        [parse(Float64, w[1]) for w in children(wgt)]
+    else
+        [1.0]
+    end
+    return Event(header, particles,  wgts)
 end
 
 function parse_lhe(filename)
@@ -104,7 +113,7 @@ function parse_lhe(filename)
     if first_child isa XML.Element && getfield(first_child, :tag) == "file"
         root = first_child
     end
-    return [parse_event(ele[1]) for ele in children(root) if ele isa XML.Element && getfield(ele, :tag) == "event"]
+    return [parse_event(ele[1], ele[2]) for ele in children(root) if ele isa XML.Element && getfield(ele, :tag) == "event"]
 end
 
 function flatparticles(filename)
