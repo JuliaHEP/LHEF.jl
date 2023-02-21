@@ -5,7 +5,6 @@ const SAMPLES_DIR = joinpath(@__DIR__, "")
 
 @testset "laziness" begin
     lazyevents = parse_lhe(joinpath(SAMPLES_DIR, "ft.lhe"))
-    @test lazyevents isa Base.Generator
     events = collect(lazyevents)
     @test events isa Vector
     @test length(events) == 45

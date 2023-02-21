@@ -1,12 +1,40 @@
 module LHEF
 
-using XML, CodecZlib
+using XML, CodecZlib, StructArrays
 
 export parse_lhe, flatparticles
 
+@kwdef struct Header
+    nparticles::Int16
+    pid::Int16
+    weight::Float64
+    scale::Float64
+    aqed::Float64
+    aqcd::Float64
+end
+Base.values(h::Header) = (h.nparticles, h.pid, h.weight, h.scale, h.aqed, h.aqcd)
+
+@kwdef struct Particle
+    idx::Int
+    id::Int32
+    status::Int8
+    mother1::Int16
+    mother2::Int16
+    color1::Int32
+    color2::Int32
+    px::Float64
+    py::Float64
+    pz::Float64
+    e::Float64
+    m::Float64
+    lifetime::Float64
+    spin::Float64
+end
+Base.values(h::Particle) = (h.idx, h.id, h.status, h.mother1, h.mother2, h.color1, h.color2, h.px, h.py, h.pz, h.e, h.m, h.lifetime, h.spin)
+
 struct Event
-    header::NamedTuple
-    particles::Vector{NamedTuple}
+    header::Header
+    particles::Vector{Particle}
 end
 
 function Base.show(io::IO, evt::Event)
@@ -31,7 +59,7 @@ end
 function parse_event(event)
     lines = split(event, '\n'; keepempty=false)
     headerdata = split(lines[1], ' '; keepempty=false)
-    header = (;
+    header = Header(;
         nparticles=parse(Int16, headerdata[1]), # Number of particles
         pid=parse(Int16, headerdata[2]),        # Process type
         weight=parse(Float64, headerdata[3]),   # Event weight
@@ -42,7 +70,7 @@ function parse_event(event)
     particles = [
         begin
             fields = split(line, ' '; keepempty=false)
-            p = (;
+            p = Particle(;
                 idx=idx - 1, # zero-based to match `mother1`, `mother2`
                 id=parse(Int32, fields[1]),
                 status=parse(Int8, fields[2]),
@@ -71,16 +99,22 @@ function parse_lhe(filename)
         else
             XML.Document(filename).root
         end
-    return (parse_event(ele[1]) for ele in children(root) if getfield(ele, :tag) == "event")
+        if getfield(children(root)[1], :tag) == "file"
+            root = children(root)[1]
+        end
+        return [parse_event(ele[1]) for ele in children(root) if ele isa XML.Element && getfield(ele, :tag) == "event"]
 end
 
 function flatparticles(filename)
-    return vcat(
-        [
-            [(; eventnum=ievt, p...) for p in evt.particles] for
-            (ievt, evt) in enumerate(parse_lhe(filename))
-        ]...,
-    )
+    res = NamedTuple{fieldnames(Particle)}([T[] for T in fieldtypes(Particle)])
+    res = merge(res, (; eventnum=Int[]))
+    for (i, evt) in enumerate(parse_lhe(filename)), p in evt.particles
+        push!(res[:eventnum], i)
+        for n in fieldnames(Particle)
+            push!(res[n], getfield(p, n))
+        end
+    end
+    return StructArray(res)
 end
 
 end # module
