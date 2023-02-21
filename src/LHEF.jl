@@ -1,6 +1,6 @@
 module LHEF
 
-using EzXML
+using XML, CodecZlib
 
 export parse_lhe, flatparticles
 
@@ -65,13 +65,13 @@ function parse_event(event)
 end
 
 function parse_lhe(filename)
-    reader = open(EzXML.StreamReader, filename)
-    function f(item)
-        return (item != nothing) &&
-               (reader.name == "event") &&
-               (reader.type == EzXML.READER_ELEMENT)
-    end
-    return (parse_event(reader.content) for _ in Iterators.filter(f, reader))
+    root = if endswith(filename, "gz")
+            io = IOBuffer(transcode(GzipDecompressor, read(filename)))
+            Document(XML.XMLTokenIterator(io)).root
+        else
+            XML.Document(filename).root
+        end
+    return (parse_event(ele[1]) for ele in children(root) if getfield(ele, :tag) == "event")
 end
 
 function flatparticles(filename)
