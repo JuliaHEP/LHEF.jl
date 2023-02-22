@@ -1,6 +1,7 @@
 module LHEF
 
-using XML, CodecZlib, StructArrays
+using EzXML
+using StructArrays
 
 export parse_lhe, flatparticles
 
@@ -32,32 +33,37 @@ Base.@kwdef struct Particle
 end
 Base.values(h::Particle) = (h.idx, h.id, h.status, h.mother1, h.mother2, h.color1, h.color2, h.px, h.py, h.pz, h.e, h.m, h.lifetime, h.spin)
 
-struct Event
+Base.@kwdef struct Event
     header::Header
     particles::Vector{Particle}
+    weights::Vector{Float64}
 end
 
 function Base.show(io::IO, evt::Event)
-    pads = (3, 6, 6, 7, 7, 6, 6, 14, 14, 14, 14, 6, 8, 6)
+    pads = (3, 6, 6, 7, 7, 6, 6, 11, 11, 11, 11, 10, 7, 6)
 
     println(io, "  Event header: ", evt.header)
     parts = evt.particles
     println(io, "  Event particles:")
     print(io, "  ")
-    ks = lpad.(keys(first(parts)), pads)
+    ks = lpad.(propertynames(first(parts)), pads)
     print(io, join(ks, "| ")...)
     println(io)
 
     for p in parts
-        ps = lpad.(values(p), pads)
+        vals = [x isa Integer ? x : round(x; sigdigits=6) for x in values(p)]
+        ps = lpad.(vals, pads)
         print(io, "  ")
         print(io, join(ps, ", ")...)
         println(io)
     end
+
+    println(io, "  Event weights: ", evt.weights)
 end
 
-function parse_event(event)
+function parse_event(event, wgts)
     lines = split(event, '\n'; keepempty=false)
+    filter!(!startswith('#'), lines)
     headerdata = split(lines[1], ' '; keepempty=false)
     header = Header(;
         nparticles=parse(Int16, headerdata[1]), # Number of particles
@@ -71,7 +77,7 @@ function parse_event(event)
         begin
             fields = split(line, ' '; keepempty=false)
             p = Particle(;
-                idx=idx - 1, # zero-based to match `mother1`, `mother2`
+                idx=idx,
                 id=parse(Int32, fields[1]),
                 status=parse(Int8, fields[2]),
                 mother1=parse(Int16, fields[3]),
@@ -89,22 +95,46 @@ function parse_event(event)
             p
         end for (idx, line) in enumerate(lines[2:(2 + header.nparticles - 1)])
     ]
-    return Event(header, particles)
+    return Event(header, particles, wgts)
+end
+
+function isevent(reader)
+    (reader.name == "event") &&
+    (reader.type == EzXML.READER_ELEMENT)
+end
+function collect_wgts(reader)
+    res = Float64[]
+    while !isevent(reader)
+        isnothing(iterate(reader)) && break
+        if reader.name == "wgt" && reader.type == EzXML.READER_ELEMENT
+            push!(res, parse(Float64, reader.content))
+        end
+    end
+    return res
 end
 
 function parse_lhe(filename)
-    root = if endswith(filename, "gz")
-        io = IOBuffer(transcode(GzipDecompressor, read(filename)))
-        Document(XML.XMLTokenIterator(io)).root
-    else
-        XML.Document(filename).root
+    res = Event[]
+    open(EzXML.StreamReader, filename) do reader
+        local particles_str, wgts
+        while true
+            if isevent(reader)
+                particles_str = reader.content
+                isnothing(iterate(reader)) && break
+                # if the next element is not "event", we look for weights
+                # otherwise, we assume there are no weights
+                wgts = if !isevent(reader)
+                    collect_wgts(reader)
+                else
+                    [1.0]
+                end
+                push!(res, parse_event(particles_str, wgts))
+            else
+                isnothing(iterate(reader)) && break
+            end
+        end
     end
-
-    first_child = children(root)[1]
-    if first_child isa XML.Element && getfield(first_child, :tag) == "file"
-        root = first_child
-    end
-    return [parse_event(ele[1]) for ele in children(root) if ele isa XML.Element && getfield(ele, :tag) == "event"]
+    return res
 end
 
 function flatparticles(filename)
