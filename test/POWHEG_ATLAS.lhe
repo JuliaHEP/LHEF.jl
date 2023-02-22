@@ -1,0 +1,596 @@
+<LesHouchesEvents version="3.0">
+<!--
+file generated with POWHEG-BOX-V2
+SVN status Begin
+/afs/cern.ch/atlas/offline/external/powhegbox/ATLASOTF-00-03-08/POWHEG-BOX-V2
+URL: svn://powhegbox.mib.infn.it/trunk/POWHEG-BOX-V2
+Rev.3154
+Warning: not a clean version:
+M       include/pwhg_bookhist-multi.h
+/afs/cern.ch/atlas/offline/external/powhegbox/ATLASOTF-00-03-08/POWHEG-BOX-V2/HJ
+URL: svn://powhegbox.mib.infn.it/trunk/User-Processes-V2/HJ
+Rev.3133
+PDF package: lha
+ Random number generator initialized with:         3044             0             0
+-->
+<header>
+<initrwgt>
+<weightgroup name='nominal' combine='none'>
+<weight id='0'> nominal </weight>
+</weightgroup>
+<weightgroup name='scale_variation' combine='envelope'>
+<weight id='1001'> muR = 0.5, muF = 0.5 </weight>
+<weight id='1002'> muR = 1.0, muF = 0.5 </weight>
+<weight id='1003'> muR = 2.0, muF = 0.5 </weight>
+<weight id='1004'> muR = 0.5, muF = 1.0 </weight>
+<weight id='1005'> muR = 2.0, muF = 1.0 </weight>
+<weight id='1006'> muR = 0.5, muF = 2.0 </weight>
+<weight id='1007'> muR = 1.0, muF = 2.0 </weight>
+<weight id='1008'> muR = 2.0, muF = 2.0 </weight>
+</weightgroup>
+<weightgroup name='PDF_variation' combine='hessian'>
+<weight id='2001'> PDF set = 91400 </weight>
+<weight id='2002'> PDF set = 260000 </weight>
+<weight id='2003'> PDF set = 260001 </weight>
+<weight id='2004'> PDF set = 260002 </weight>
+<weight id='2005'> PDF set = 260003 </weight>
+<weight id='2006'> PDF set = 260004 </weight>
+<weight id='2007'> PDF set = 260005 </weight>
+<weight id='2008'> PDF set = 260006 </weight>
+<weight id='2009'> PDF set = 260007 </weight>
+<weight id='2010'> PDF set = 260008 </weight>
+<weight id='2011'> PDF set = 260009 </weight>
+<weight id='2012'> PDF set = 260010 </weight>
+<weight id='2013'> PDF set = 260011 </weight>
+<weight id='2014'> PDF set = 260012 </weight>
+<weight id='2015'> PDF set = 260013 </weight>
+<weight id='2016'> PDF set = 260014 </weight>
+<weight id='2017'> PDF set = 260015 </weight>
+<weight id='2018'> PDF set = 260016 </weight>
+<weight id='2019'> PDF set = 260017 </weight>
+<weight id='2020'> PDF set = 260018 </weight>
+<weight id='2021'> PDF set = 260019 </weight>
+<weight id='2022'> PDF set = 260020 </weight>
+<weight id='2023'> PDF set = 260021 </weight>
+<weight id='2024'> PDF set = 260022 </weight>
+<weight id='2025'> PDF set = 260023 </weight>
+<weight id='2026'> PDF set = 260024 </weight>
+<weight id='2027'> PDF set = 260025 </weight>
+<weight id='2028'> PDF set = 260026 </weight>
+<weight id='2029'> PDF set = 260027 </weight>
+<weight id='2030'> PDF set = 260028 </weight>
+<weight id='2031'> PDF set = 260029 </weight>
+<weight id='2032'> PDF set = 260030 </weight>
+<weight id='2033'> PDF set = 260031 </weight>
+<weight id='2034'> PDF set = 260032 </weight>
+<weight id='2035'> PDF set = 260033 </weight>
+<weight id='2036'> PDF set = 260034 </weight>
+<weight id='2037'> PDF set = 260035 </weight>
+<weight id='2038'> PDF set = 260036 </weight>
+<weight id='2039'> PDF set = 260037 </weight>
+<weight id='2040'> PDF set = 260038 </weight>
+<weight id='2041'> PDF set = 260039 </weight>
+<weight id='2042'> PDF set = 260040 </weight>
+<weight id='2043'> PDF set = 260041 </weight>
+<weight id='2044'> PDF set = 260042 </weight>
+<weight id='2045'> PDF set = 260043 </weight>
+<weight id='2046'> PDF set = 260044 </weight>
+<weight id='2047'> PDF set = 260045 </weight>
+<weight id='2048'> PDF set = 260046 </weight>
+<weight id='2049'> PDF set = 260047 </weight>
+<weight id='2050'> PDF set = 260048 </weight>
+<weight id='2051'> PDF set = 260049 </weight>
+<weight id='2052'> PDF set = 260050 </weight>
+<weight id='2053'> PDF set = 260051 </weight>
+<weight id='2054'> PDF set = 260052 </weight>
+<weight id='2055'> PDF set = 260053 </weight>
+<weight id='2056'> PDF set = 260054 </weight>
+<weight id='2057'> PDF set = 260055 </weight>
+<weight id='2058'> PDF set = 260056 </weight>
+<weight id='2059'> PDF set = 260057 </weight>
+<weight id='2060'> PDF set = 260058 </weight>
+<weight id='2061'> PDF set = 260059 </weight>
+<weight id='2062'> PDF set = 260060 </weight>
+<weight id='2063'> PDF set = 260061 </weight>
+<weight id='2064'> PDF set = 260062 </weight>
+<weight id='2065'> PDF set = 260063 </weight>
+<weight id='2066'> PDF set = 260064 </weight>
+<weight id='2067'> PDF set = 260065 </weight>
+<weight id='2068'> PDF set = 260066 </weight>
+<weight id='2069'> PDF set = 260067 </weight>
+<weight id='2070'> PDF set = 260068 </weight>
+<weight id='2071'> PDF set = 260069 </weight>
+<weight id='2072'> PDF set = 260070 </weight>
+<weight id='2073'> PDF set = 260071 </weight>
+<weight id='2074'> PDF set = 260072 </weight>
+<weight id='2075'> PDF set = 260073 </weight>
+<weight id='2076'> PDF set = 260074 </weight>
+<weight id='2077'> PDF set = 260075 </weight>
+<weight id='2078'> PDF set = 260076 </weight>
+<weight id='2079'> PDF set = 260077 </weight>
+<weight id='2080'> PDF set = 260078 </weight>
+<weight id='2081'> PDF set = 260079 </weight>
+<weight id='2082'> PDF set = 260080 </weight>
+<weight id='2083'> PDF set = 260081 </weight>
+<weight id='2084'> PDF set = 260082 </weight>
+<weight id='2085'> PDF set = 260083 </weight>
+<weight id='2086'> PDF set = 260084 </weight>
+<weight id='2087'> PDF set = 260085 </weight>
+<weight id='2088'> PDF set = 260086 </weight>
+<weight id='2089'> PDF set = 260087 </weight>
+<weight id='2090'> PDF set = 260088 </weight>
+<weight id='2091'> PDF set = 260089 </weight>
+<weight id='2092'> PDF set = 260090 </weight>
+<weight id='2093'> PDF set = 260091 </weight>
+<weight id='2094'> PDF set = 260092 </weight>
+<weight id='2095'> PDF set = 260093 </weight>
+<weight id='2096'> PDF set = 260094 </weight>
+<weight id='2097'> PDF set = 260095 </weight>
+<weight id='2098'> PDF set = 260096 </weight>
+<weight id='2099'> PDF set = 260097 </weight>
+<weight id='2100'> PDF set = 260098 </weight>
+<weight id='2101'> PDF set = 260099 </weight>
+<weight id='2102'> PDF set = 260100 </weight>
+<weight id='2103'> PDF set = 90400 </weight>
+<weight id='2104'> PDF set = 90401 </weight>
+<weight id='2105'> PDF set = 90402 </weight>
+<weight id='2106'> PDF set = 90403 </weight>
+<weight id='2107'> PDF set = 90404 </weight>
+<weight id='2108'> PDF set = 90405 </weight>
+<weight id='2109'> PDF set = 90406 </weight>
+<weight id='2110'> PDF set = 90407 </weight>
+<weight id='2111'> PDF set = 90408 </weight>
+<weight id='2112'> PDF set = 90409 </weight>
+<weight id='2113'> PDF set = 90410 </weight>
+<weight id='2114'> PDF set = 90411 </weight>
+<weight id='2115'> PDF set = 90412 </weight>
+<weight id='2116'> PDF set = 90413 </weight>
+<weight id='2117'> PDF set = 90414 </weight>
+<weight id='2118'> PDF set = 90415 </weight>
+<weight id='2119'> PDF set = 90416 </weight>
+<weight id='2120'> PDF set = 90417 </weight>
+<weight id='2121'> PDF set = 90418 </weight>
+<weight id='2122'> PDF set = 90419 </weight>
+<weight id='2123'> PDF set = 90420 </weight>
+<weight id='2124'> PDF set = 90421 </weight>
+<weight id='2125'> PDF set = 90422 </weight>
+<weight id='2126'> PDF set = 90423 </weight>
+<weight id='2127'> PDF set = 90424 </weight>
+<weight id='2128'> PDF set = 90425 </weight>
+<weight id='2129'> PDF set = 90426 </weight>
+<weight id='2130'> PDF set = 90427 </weight>
+<weight id='2131'> PDF set = 90428 </weight>
+<weight id='2132'> PDF set = 90429 </weight>
+<weight id='2133'> PDF set = 90430 </weight>
+<weight id='2134'> PDF set = 90431 </weight>
+<weight id='2135'> PDF set = 90432 </weight>
+<weight id='2136'> PDF set = 11000 </weight>
+<weight id='2137'> PDF set = 25200 </weight>
+<weight id='2138'> PDF set = 13100 </weight>
+</weightgroup>
+<weightgroup name='quark_mass_variation' combine='none'>
+<weight id='3001'> mtmb </weight>
+<weight id='3002'> mtinf </weight>
+<weight id='3003'> mtmb-bminlo </weight>
+</weightgroup>
+<weightgroup name='NNLOPS'>
+<weight id='4001'> nnlops-nominal </weight>
+<weight id='4002'> nnlops-nominal-pdflhc </weight>
+<weight id='4003'> nnlops-mtinf </weight>
+<weight id='4004'> nnlops-bminlo </weight>
+<weight id='4005'> nnlops-nnloNom-pwgDnDn </weight>
+<weight id='4006'> nnlops-nnloNom-pwgDnNom </weight>
+<weight id='4007'> nnlops-nnloNom-pwgDnUp </weight>
+<weight id='4008'> nnlops-nnloNom-pwgNomDn </weight>
+<weight id='4009'> nnlops-nnloNom-pwgNomUp </weight>
+<weight id='4010'> nnlops-nnloNom-pwgUpDn </weight>
+<weight id='4011'> nnlops-nnloNom-pwgUpNom </weight>
+<weight id='4012'> nnlops-nnloNom-pwgUpUp </weight>
+<weight id='4013'> nnlops-nnloDn-pwgNomNom </weight>
+<weight id='4014'> nnlops-nnloDn-pwgDnDn </weight>
+<weight id='4015'> nnlops-nnloDn-pwgDnNom </weight>
+<weight id='4016'> nnlops-nnloDn-pwgDnUp </weight>
+<weight id='4017'> nnlops-nnloDn-pwgNomDn </weight>
+<weight id='4018'> nnlops-nnloDn-pwgNomUp </weight>
+<weight id='4019'> nnlops-nnloDn-pwgUpDn </weight>
+<weight id='4020'> nnlops-nnloDn-pwgUpNom </weight>
+<weight id='4021'> nnlops-nnloDn-pwgUpUp </weight>
+<weight id='4022'> nnlops-nnloUp-pwgNomNom </weight>
+<weight id='4023'> nnlops-nnloUp-pwgDnDn </weight>
+<weight id='4024'> nnlops-nnloUp-pwgDnNom </weight>
+<weight id='4025'> nnlops-nnloUp-pwgDnUp </weight>
+<weight id='4026'> nnlops-nnloUp-pwgNomDn </weight>
+<weight id='4027'> nnlops-nnloUp-pwgNomUp </weight>
+<weight id='4028'> nnlops-nnloUp-pwgUpDn </weight>
+<weight id='4029'> nnlops-nnloUp-pwgUpNom </weight>
+<weight id='4030'> nnlops-nnloUp-pwgUpUp </weight>
+</weightgroup>
+</initrwgt>
+</header>
+<init>
+     2212     2212  6.50000E+03  6.50000E+03     -1     -1     -1     -1     -4      1
+  2.82749E+01  3.95203E-02  1.00000E+00  10001
+</init>
+<event>
+      5  10001  2.84857E+01  4.47076E+00 -1.00000E+00  2.45767E-01
+      21    -1     0     0   502   512  0.000000000E+00  0.000000000E+00  2.124283492E+02  2.124283492E+02  0.000000000E+00  0.00000E+00  9.000E+00
+       2    -1     0     0   501     0  0.000000000E+00  0.000000000E+00 -2.336754320E+03  2.336754320E+03  0.000000000E+00  0.00000E+00  9.000E+00
+      25     1     1     2     0     0  1.428058780E+00 -9.107536052E+00 -5.620125319E+02  5.758195710E+02  1.250004232E+02  0.00000E+00  9.000E+00
+       2     1     1     2   502     0 -1.512330593E+00  4.637575266E+00 -1.767810590E+03  1.767817320E+03  0.000000000E+00  0.00000E+00  9.000E+00
+      21     1     1     2   501   512  8.427181324E-02  4.469960786E+00  2.054971514E+02  2.055457781E+02  4.672030912E-06  0.00000E+00  9.000E+00
+<rwgt>
+<wgt id='0'>  0.284857314E+02 </wgt>
+<wgt id='1001'>  0.387094798E+02 </wgt>
+<wgt id='1002'>  0.213613450E+02 </wgt>
+<wgt id='1003'>  0.173601493E+02 </wgt>
+<wgt id='1004'>  0.494326172E+02 </wgt>
+<wgt id='1005'>  0.235332487E+02 </wgt>
+<wgt id='1006'>  0.555583151E+02 </wgt>
+<wgt id='1007'>  0.327321916E+02 </wgt>
+<wgt id='1008'>  0.272547330E+02 </wgt>
+<wgt id='2001'>  0.283853288E+02 </wgt>
+<wgt id='2002'>  0.289871512E+02 </wgt>
+<wgt id='2003'>  0.269388500E+02 </wgt>
+<wgt id='2004'>  0.276954475E+02 </wgt>
+<wgt id='2005'>  0.297334495E+02 </wgt>
+<wgt id='2006'>  0.294378305E+02 </wgt>
+<wgt id='2007'>  0.281306013E+02 </wgt>
+<wgt id='2008'>  0.288806103E+02 </wgt>
+<wgt id='2009'>  0.284483944E+02 </wgt>
+<wgt id='2010'>  0.280428955E+02 </wgt>
+<wgt id='2011'>  0.289218308E+02 </wgt>
+<wgt id='2012'>  0.308176537E+02 </wgt>
+<wgt id='2013'>  0.303833728E+02 </wgt>
+<wgt id='2014'>  0.289680568E+02 </wgt>
+<wgt id='2015'>  0.284375988E+02 </wgt>
+<wgt id='2016'>  0.300940733E+02 </wgt>
+<wgt id='2017'>  0.281600763E+02 </wgt>
+<wgt id='2018'>  0.281203341E+02 </wgt>
+<wgt id='2019'>  0.284646212E+02 </wgt>
+<wgt id='2020'>  0.279967240E+02 </wgt>
+<wgt id='2021'>  0.287480511E+02 </wgt>
+<wgt id='2022'>  0.280955922E+02 </wgt>
+<wgt id='2023'>  0.299814170E+02 </wgt>
+<wgt id='2024'>  0.291658452E+02 </wgt>
+<wgt id='2025'>  0.293913522E+02 </wgt>
+<wgt id='2026'>  0.307187351E+02 </wgt>
+<wgt id='2027'>  0.290332008E+02 </wgt>
+<wgt id='2028'>  0.293606985E+02 </wgt>
+<wgt id='2029'>  0.279211008E+02 </wgt>
+<wgt id='2030'>  0.295699647E+02 </wgt>
+<wgt id='2031'>  0.284744138E+02 </wgt>
+<wgt id='2032'>  0.284327557E+02 </wgt>
+<wgt id='2033'>  0.299917113E+02 </wgt>
+<wgt id='2034'>  0.298353159E+02 </wgt>
+<wgt id='2035'>  0.295111246E+02 </wgt>
+<wgt id='2036'>  0.307958675E+02 </wgt>
+<wgt id='2037'>  0.296974466E+02 </wgt>
+<wgt id='2038'>  0.284621466E+02 </wgt>
+<wgt id='2039'>  0.278761520E+02 </wgt>
+<wgt id='2040'>  0.277988637E+02 </wgt>
+<wgt id='2041'>  0.283390102E+02 </wgt>
+<wgt id='2042'>  0.296724419E+02 </wgt>
+<wgt id='2043'>  0.289718227E+02 </wgt>
+<wgt id='2044'>  0.294062550E+02 </wgt>
+<wgt id='2045'>  0.295841397E+02 </wgt>
+<wgt id='2046'>  0.297798277E+02 </wgt>
+<wgt id='2047'>  0.302626777E+02 </wgt>
+<wgt id='2048'>  0.296265122E+02 </wgt>
+<wgt id='2049'>  0.279919259E+02 </wgt>
+<wgt id='2050'>  0.286165205E+02 </wgt>
+<wgt id='2051'>  0.285474637E+02 </wgt>
+<wgt id='2052'>  0.294184948E+02 </wgt>
+<wgt id='2053'>  0.294763336E+02 </wgt>
+<wgt id='2054'>  0.289089503E+02 </wgt>
+<wgt id='2055'>  0.299181791E+02 </wgt>
+<wgt id='2056'>  0.289164493E+02 </wgt>
+<wgt id='2057'>  0.294980453E+02 </wgt>
+<wgt id='2058'>  0.287893708E+02 </wgt>
+<wgt id='2059'>  0.283806983E+02 </wgt>
+<wgt id='2060'>  0.298162394E+02 </wgt>
+<wgt id='2061'>  0.280136240E+02 </wgt>
+<wgt id='2062'>  0.286518528E+02 </wgt>
+<wgt id='2063'>  0.286319436E+02 </wgt>
+<wgt id='2064'>  0.288027802E+02 </wgt>
+<wgt id='2065'>  0.302389578E+02 </wgt>
+<wgt id='2066'>  0.282617749E+02 </wgt>
+<wgt id='2067'>  0.295649881E+02 </wgt>
+<wgt id='2068'>  0.293168972E+02 </wgt>
+<wgt id='2069'>  0.286946557E+02 </wgt>
+<wgt id='2070'>  0.297851534E+02 </wgt>
+<wgt id='2071'>  0.290914394E+02 </wgt>
+<wgt id='2072'>  0.295748508E+02 </wgt>
+<wgt id='2073'>  0.286667952E+02 </wgt>
+<wgt id='2074'>  0.290573852E+02 </wgt>
+<wgt id='2075'>  0.275726893E+02 </wgt>
+<wgt id='2076'>  0.308402662E+02 </wgt>
+<wgt id='2077'>  0.283151776E+02 </wgt>
+<wgt id='2078'>  0.307793042E+02 </wgt>
+<wgt id='2079'>  0.299784479E+02 </wgt>
+<wgt id='2080'>  0.287895893E+02 </wgt>
+<wgt id='2081'>  0.288486864E+02 </wgt>
+<wgt id='2082'>  0.288134861E+02 </wgt>
+<wgt id='2083'>  0.300323836E+02 </wgt>
+<wgt id='2084'>  0.297856046E+02 </wgt>
+<wgt id='2085'>  0.280181142E+02 </wgt>
+<wgt id='2086'>  0.293554660E+02 </wgt>
+<wgt id='2087'>  0.280959713E+02 </wgt>
+<wgt id='2088'>  0.285449265E+02 </wgt>
+<wgt id='2089'>  0.295781596E+02 </wgt>
+<wgt id='2090'>  0.287757362E+02 </wgt>
+<wgt id='2091'>  0.275236952E+02 </wgt>
+<wgt id='2092'>  0.291010992E+02 </wgt>
+<wgt id='2093'>  0.292258738E+02 </wgt>
+<wgt id='2094'>  0.286018726E+02 </wgt>
+<wgt id='2095'>  0.283373568E+02 </wgt>
+<wgt id='2096'>  0.296550492E+02 </wgt>
+<wgt id='2097'>  0.283967325E+02 </wgt>
+<wgt id='2098'>  0.285231564E+02 </wgt>
+<wgt id='2099'>  0.285334775E+02 </wgt>
+<wgt id='2100'>  0.290663497E+02 </wgt>
+<wgt id='2101'>  0.282767302E+02 </wgt>
+<wgt id='2102'>  0.266793642E+02 </wgt>
+<wgt id='2103'>  0.296811069E+02 </wgt>
+<wgt id='2104'>  0.294736622E+02 </wgt>
+<wgt id='2105'>  0.296773797E+02 </wgt>
+<wgt id='2106'>  0.296908283E+02 </wgt>
+<wgt id='2107'>  0.302879904E+02 </wgt>
+<wgt id='2108'>  0.296613878E+02 </wgt>
+<wgt id='2109'>  0.298310898E+02 </wgt>
+<wgt id='2110'>  0.296049964E+02 </wgt>
+<wgt id='2111'>  0.297063669E+02 </wgt>
+<wgt id='2112'>  0.298999068E+02 </wgt>
+<wgt id='2113'>  0.296626120E+02 </wgt>
+<wgt id='2114'>  0.299268859E+02 </wgt>
+<wgt id='2115'>  0.299368868E+02 </wgt>
+<wgt id='2116'>  0.296409395E+02 </wgt>
+<wgt id='2117'>  0.297260177E+02 </wgt>
+<wgt id='2118'>  0.297748124E+02 </wgt>
+<wgt id='2119'>  0.298136251E+02 </wgt>
+<wgt id='2120'>  0.288243248E+02 </wgt>
+<wgt id='2121'>  0.296628474E+02 </wgt>
+<wgt id='2122'>  0.297208828E+02 </wgt>
+<wgt id='2123'>  0.297367448E+02 </wgt>
+<wgt id='2124'>  0.296481439E+02 </wgt>
+<wgt id='2125'>  0.296494437E+02 </wgt>
+<wgt id='2126'>  0.296845322E+02 </wgt>
+<wgt id='2127'>  0.296204803E+02 </wgt>
+<wgt id='2128'>  0.297331321E+02 </wgt>
+<wgt id='2129'>  0.296274178E+02 </wgt>
+<wgt id='2130'>  0.296650462E+02 </wgt>
+<wgt id='2131'>  0.296205023E+02 </wgt>
+<wgt id='2132'>  0.296342078E+02 </wgt>
+<wgt id='2133'>  0.296854280E+02 </wgt>
+<wgt id='2134'>  0.299925726E+02 </wgt>
+<wgt id='2135'>  0.293015421E+02 </wgt>
+<wgt id='2136'>  0.305623216E+02 </wgt>
+<wgt id='2137'>  0.294534686E+02 </wgt>
+<wgt id='2138'>  0.305786666E+02 </wgt>
+<wgt id='3001'>  0.284857000E+02 </wgt>
+<wgt id='3002'>  0.305265019E+02 </wgt>
+<wgt id='3003'>  0.259900170E+02 </wgt>
+<wgt id='4001'> 0.7685086858E+02 </wgt>
+<wgt id='4002'> 0.7703554227E+02 </wgt>
+<wgt id='4003'> 0.7957837228E+02 </wgt>
+<wgt id='4004'> 0.7580938998E+02 </wgt>
+<wgt id='4005'> 0.7313156027E+02 </wgt>
+<wgt id='4006'> 0.6135881626E+02 </wgt>
+<wgt id='4007'> 0.6108324700E+02 </wgt>
+<wgt id='4008'> 0.9009715141E+02 </wgt>
+<wgt id='4009'> 0.7683885521E+02 </wgt>
+<wgt id='4010'> 0.9894299149E+02 </wgt>
+<wgt id='4011'> 0.8543661322E+02 </wgt>
+<wgt id='4012'> 0.8567861191E+02 </wgt>
+<wgt id='4013'> 0.8405673858E+02 </wgt>
+<wgt id='4014'> 0.8040621278E+02 </wgt>
+<wgt id='4015'> 0.6714462258E+02 </wgt>
+<wgt id='4016'> 0.6668399555E+02 </wgt>
+<wgt id='4017'> 0.9898668760E+02 </wgt>
+<wgt id='4018'> 0.8385179504E+02 </wgt>
+<wgt id='4019'> 0.1086543719E+03 </wgt>
+<wgt id='4020'> 0.9341113304E+02 </wgt>
+<wgt id='4021'> 0.9346692739E+02 </wgt>
+<wgt id='4022'> 0.6851983470E+02 </wgt>
+<wgt id='4023'> 0.6472100382E+02 </wgt>
+<wgt id='4024'> 0.5466958257E+02 </wgt>
+<wgt id='4025'> 0.5460796701E+02 </wgt>
+<wgt id='4026'> 0.7981955453E+02 </wgt>
+<wgt id='4027'> 0.6873087669E+02 </wgt>
+<wgt id='4028'> 0.8771522309E+02 </wgt>
+<wgt id='4029'> 0.7621690834E+02 </wgt>
+<wgt id='4030'> 0.7667418635E+02 </wgt>
+</rwgt>
+#pdf  21  2 0.10624331E-02 0.35944127E+00 0.12500000E+03 0.29426008E+02 0.24952245E+00
+</event>
+<event>
+      5  10001  2.84857E+01  5.12795E+01 -1.00000E+00  1.36462E-01
+       2    -1     0     0   501     0  0.000000000E+00  0.000000000E+00  3.851305138E+03  3.851305138E+03  0.000000000E+00  0.00000E+00  9.000E+00
+      21    -1     0     0   511   501  0.000000000E+00  0.000000000E+00 -1.258964958E+02  1.258964958E+02  0.000000000E+00  0.00000E+00  9.000E+00
+      25     1     1     2     0     0 -3.237738386E+02  6.134107512E+01  1.842130584E+02  3.976826537E+02  1.249992646E+02  0.00000E+00  9.000E+00
+       2     1     1     2   502     0  3.648108068E+02 -3.059128025E+01  3.482037062E+03  3.501229048E+03  4.315837288E-05  0.00000E+00  9.000E+00
+      21     1     1     2   511   502 -4.103696824E+01 -3.074979487E+01  5.915852258E+01  7.828993192E+01  9.536743164E-07  0.00000E+00  9.000E+00
+<rwgt>
+<wgt id='0'>  0.284857314E+02 </wgt>
+<wgt id='1001'>  0.368531304E+02 </wgt>
+<wgt id='1002'>  0.303681685E+02 </wgt>
+<wgt id='1003'>  0.251480266E+02 </wgt>
+<wgt id='1004'>  0.350075498E+02 </wgt>
+<wgt id='1005'>  0.233783276E+02 </wgt>
+<wgt id='1006'>  0.334843681E+02 </wgt>
+<wgt id='1007'>  0.269216080E+02 </wgt>
+<wgt id='1008'>  0.219030152E+02 </wgt>
+<wgt id='2001'>  0.292239735E+02 </wgt>
+<wgt id='2002'>  0.313076490E+02 </wgt>
+<wgt id='2003'>  0.307194779E+02 </wgt>
+<wgt id='2004'>  0.310757899E+02 </wgt>
+<wgt id='2005'>  0.308359515E+02 </wgt>
+<wgt id='2006'>  0.324276735E+02 </wgt>
+<wgt id='2007'>  0.319295733E+02 </wgt>
+<wgt id='2008'>  0.321157204E+02 </wgt>
+<wgt id='2009'>  0.327923789E+02 </wgt>
+<wgt id='2010'>  0.290873795E+02 </wgt>
+<wgt id='2011'>  0.311248028E+02 </wgt>
+<wgt id='2012'>  0.309933711E+02 </wgt>
+<wgt id='2013'>  0.307662972E+02 </wgt>
+<wgt id='2014'>  0.308289515E+02 </wgt>
+<wgt id='2015'>  0.302867286E+02 </wgt>
+<wgt id='2016'>  0.318923933E+02 </wgt>
+<wgt id='2017'>  0.310362653E+02 </wgt>
+<wgt id='2018'>  0.310944830E+02 </wgt>
+<wgt id='2019'>  0.295580900E+02 </wgt>
+<wgt id='2020'>  0.322540593E+02 </wgt>
+<wgt id='2021'>  0.312602415E+02 </wgt>
+<wgt id='2022'>  0.306621043E+02 </wgt>
+<wgt id='2023'>  0.301545456E+02 </wgt>
+<wgt id='2024'>  0.325823987E+02 </wgt>
+<wgt id='2025'>  0.331924114E+02 </wgt>
+<wgt id='2026'>  0.324715127E+02 </wgt>
+<wgt id='2027'>  0.309984242E+02 </wgt>
+<wgt id='2028'>  0.315696874E+02 </wgt>
+<wgt id='2029'>  0.304777684E+02 </wgt>
+<wgt id='2030'>  0.306107478E+02 </wgt>
+<wgt id='2031'>  0.302489736E+02 </wgt>
+<wgt id='2032'>  0.320608896E+02 </wgt>
+<wgt id='2033'>  0.309774863E+02 </wgt>
+<wgt id='2034'>  0.313473921E+02 </wgt>
+<wgt id='2035'>  0.299412565E+02 </wgt>
+<wgt id='2036'>  0.311585349E+02 </wgt>
+<wgt id='2037'>  0.318590195E+02 </wgt>
+<wgt id='2038'>  0.315476792E+02 </wgt>
+<wgt id='2039'>  0.301247990E+02 </wgt>
+<wgt id='2040'>  0.315973142E+02 </wgt>
+<wgt id='2041'>  0.331753818E+02 </wgt>
+<wgt id='2042'>  0.309748430E+02 </wgt>
+<wgt id='2043'>  0.330152269E+02 </wgt>
+<wgt id='2044'>  0.309846596E+02 </wgt>
+<wgt id='2045'>  0.305092971E+02 </wgt>
+<wgt id='2046'>  0.310622432E+02 </wgt>
+<wgt id='2047'>  0.326323768E+02 </wgt>
+<wgt id='2048'>  0.316927937E+02 </wgt>
+<wgt id='2049'>  0.308820074E+02 </wgt>
+<wgt id='2050'>  0.318924004E+02 </wgt>
+<wgt id='2051'>  0.289460577E+02 </wgt>
+<wgt id='2052'>  0.297991903E+02 </wgt>
+<wgt id='2053'>  0.319789328E+02 </wgt>
+<wgt id='2054'>  0.309401752E+02 </wgt>
+<wgt id='2055'>  0.321223676E+02 </wgt>
+<wgt id='2056'>  0.322244962E+02 </wgt>
+<wgt id='2057'>  0.322225928E+02 </wgt>
+<wgt id='2058'>  0.318322118E+02 </wgt>
+<wgt id='2059'>  0.322706720E+02 </wgt>
+<wgt id='2060'>  0.304011026E+02 </wgt>
+<wgt id='2061'>  0.302810759E+02 </wgt>
+<wgt id='2062'>  0.313671140E+02 </wgt>
+<wgt id='2063'>  0.320238737E+02 </wgt>
+<wgt id='2064'>  0.285899886E+02 </wgt>
+<wgt id='2065'>  0.327650872E+02 </wgt>
+<wgt id='2066'>  0.297712411E+02 </wgt>
+<wgt id='2067'>  0.334970011E+02 </wgt>
+<wgt id='2068'>  0.324179758E+02 </wgt>
+<wgt id='2069'>  0.320787465E+02 </wgt>
+<wgt id='2070'>  0.311045443E+02 </wgt>
+<wgt id='2071'>  0.327775484E+02 </wgt>
+<wgt id='2072'>  0.309373476E+02 </wgt>
+<wgt id='2073'>  0.333618005E+02 </wgt>
+<wgt id='2074'>  0.315975193E+02 </wgt>
+<wgt id='2075'>  0.323021339E+02 </wgt>
+<wgt id='2076'>  0.324484074E+02 </wgt>
+<wgt id='2077'>  0.298230276E+02 </wgt>
+<wgt id='2078'>  0.295357178E+02 </wgt>
+<wgt id='2079'>  0.318704584E+02 </wgt>
+<wgt id='2080'>  0.320901016E+02 </wgt>
+<wgt id='2081'>  0.313326537E+02 </wgt>
+<wgt id='2082'>  0.314337256E+02 </wgt>
+<wgt id='2083'>  0.312916985E+02 </wgt>
+<wgt id='2084'>  0.306240880E+02 </wgt>
+<wgt id='2085'>  0.288852297E+02 </wgt>
+<wgt id='2086'>  0.336811720E+02 </wgt>
+<wgt id='2087'>  0.298938442E+02 </wgt>
+<wgt id='2088'>  0.314618789E+02 </wgt>
+<wgt id='2089'>  0.316317907E+02 </wgt>
+<wgt id='2090'>  0.310874980E+02 </wgt>
+<wgt id='2091'>  0.301708603E+02 </wgt>
+<wgt id='2092'>  0.305348474E+02 </wgt>
+<wgt id='2093'>  0.303656473E+02 </wgt>
+<wgt id='2094'>  0.320020271E+02 </wgt>
+<wgt id='2095'>  0.313831116E+02 </wgt>
+<wgt id='2096'>  0.323882504E+02 </wgt>
+<wgt id='2097'>  0.282311243E+02 </wgt>
+<wgt id='2098'>  0.321612453E+02 </wgt>
+<wgt id='2099'>  0.334933947E+02 </wgt>
+<wgt id='2100'>  0.325451363E+02 </wgt>
+<wgt id='2101'>  0.306325400E+02 </wgt>
+<wgt id='2102'>  0.293737319E+02 </wgt>
+<wgt id='2103'>  0.319052797E+02 </wgt>
+<wgt id='2104'>  0.320124041E+02 </wgt>
+<wgt id='2105'>  0.319105778E+02 </wgt>
+<wgt id='2106'>  0.320383824E+02 </wgt>
+<wgt id='2107'>  0.322387470E+02 </wgt>
+<wgt id='2108'>  0.321411140E+02 </wgt>
+<wgt id='2109'>  0.321409111E+02 </wgt>
+<wgt id='2110'>  0.318700426E+02 </wgt>
+<wgt id='2111'>  0.319678687E+02 </wgt>
+<wgt id='2112'>  0.318829010E+02 </wgt>
+<wgt id='2113'>  0.317582719E+02 </wgt>
+<wgt id='2114'>  0.318085759E+02 </wgt>
+<wgt id='2115'>  0.325360484E+02 </wgt>
+<wgt id='2116'>  0.318306394E+02 </wgt>
+<wgt id='2117'>  0.319543824E+02 </wgt>
+<wgt id='2118'>  0.319767074E+02 </wgt>
+<wgt id='2119'>  0.318984225E+02 </wgt>
+<wgt id='2120'>  0.318102595E+02 </wgt>
+<wgt id='2121'>  0.318048719E+02 </wgt>
+<wgt id='2122'>  0.316509134E+02 </wgt>
+<wgt id='2123'>  0.318219286E+02 </wgt>
+<wgt id='2124'>  0.319668611E+02 </wgt>
+<wgt id='2125'>  0.319681336E+02 </wgt>
+<wgt id='2126'>  0.317653385E+02 </wgt>
+<wgt id='2127'>  0.319886694E+02 </wgt>
+<wgt id='2128'>  0.318845787E+02 </wgt>
+<wgt id='2129'>  0.318912898E+02 </wgt>
+<wgt id='2130'>  0.318780765E+02 </wgt>
+<wgt id='2131'>  0.319218403E+02 </wgt>
+<wgt id='2132'>  0.318435941E+02 </wgt>
+<wgt id='2133'>  0.318560504E+02 </wgt>
+<wgt id='2134'>  0.312100800E+02 </wgt>
+<wgt id='2135'>  0.325799379E+02 </wgt>
+<wgt id='2136'>  0.315071504E+02 </wgt>
+<wgt id='2137'>  0.322476873E+02 </wgt>
+<wgt id='2138'>  0.320754845E+02 </wgt>
+<wgt id='3001'>  0.284857000E+02 </wgt>
+<wgt id='3002'>  0.473464888E+02 </wgt>
+<wgt id='3003'>  0.284643013E+02 </wgt>
+<wgt id='4001'> 0.2920341317E+02 </wgt>
+<wgt id='4002'> 0.2996050211E+02 </wgt>
+<wgt id='4003'> 0.4849418101E+02 </wgt>
+<wgt id='4004'> 0.2932146736E+02 </wgt>
+<wgt id='4005'> 0.3716314681E+02 </wgt>
+<wgt id='4006'> 0.3123136523E+02 </wgt>
+<wgt id='4007'> 0.2621510440E+02 </wgt>
+<wgt id='4008'> 0.3529299591E+02 </wgt>
+<wgt id='4009'> 0.2425106080E+02 </wgt>
+<wgt id='4010'> 0.3374937076E+02 </wgt>
+<wgt id='4011'> 0.2754640619E+02 </wgt>
+<wgt id='4012'> 0.2265496711E+02 </wgt>
+<wgt id='4013'> 0.2937980875E+02 </wgt>
+<wgt id='4014'> 0.3733184579E+02 </wgt>
+<wgt id='4015'> 0.3143037110E+02 </wgt>
+<wgt id='4016'> 0.2641202179E+02 </wgt>
+<wgt id='4017'> 0.3545215951E+02 </wgt>
+<wgt id='4018'> 0.2442127683E+02 </wgt>
+<wgt id='4019'> 0.3390089237E+02 </wgt>
+<wgt id='4020'> 0.2770715923E+02 </wgt>
+<wgt id='4021'> 0.2280732505E+02 </wgt>
+<wgt id='4022'> 0.2903796283E+02 </wgt>
+<wgt id='4023'> 0.3700491550E+02 </wgt>
+<wgt id='4024'> 0.3104470755E+02 </wgt>
+<wgt id='4025'> 0.2603040560E+02 </wgt>
+<wgt id='4026'> 0.3514370831E+02 </wgt>
+<wgt id='4027'> 0.2409140658E+02 </wgt>
+<wgt id='4028'> 0.3360725097E+02 </wgt>
+<wgt id='4029'> 0.2739562778E+02 </wgt>
+<wgt id='4030'> 0.2251206289E+02 </wgt>
+</rwgt>
+#pdf   2 21 0.58150066E+00 0.17883671E-01 0.12500000E+03 0.47630430E-01 0.53288110E+01
+</event>
+</LesHouchesEvents>
